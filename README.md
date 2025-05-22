@@ -1,7 +1,6 @@
 # vr-forest
 
-
-A peaceful, immersive boreal forest experience built with A-Frame and deployed via GitHub Pages.
+A simple, immersive boreal forest experience built with A-Frame and deployed via GitHub Pages.
 Designed to be simple, accessible, and cross-platform — viewable on desktop, mobile, or VR headsets.
 
 Skills needed: 
