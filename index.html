@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>VR Forest</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+</head>
+
+<body>
+    <a-scene>
+
+        <!-- Sky (that is, the Background) use a 360 degree equirectangular image -->
+
+        <a-sky src="assets/textures/sky-forest-360.png" rotation="0 -90 0" preload="true">
+        </a-sky>
+
+
+        <!-- Ground -->
+
+        <a-plane src="assets/textures/plane-forest-floor.png" rotation="-90 0 0" width="30" height="30" repeat="10 10">
+        </a-plane>
+
+        <!-- Sound -->
+
+        <a-sound id="loonSound" src="assets/audio/loon-call-335485.mp3" autoplay="true" loop="false" position="0 2 0"
+            volume="0.5" timed-loon>
+        </a-sound>
+
+
+        <!-- Floating Welcome Text (Waits 3 seconds (delay: 3000) Fades to opacity 0 over duration of 4 seconds) -->
+
+        <a-entity id="welcomeText" position="0 1.5 -2"
+            text="value: Welcome to the Forest; color: #ffffff; align: center; width: 4"
+            animation__fadeout="property: text.opacity; to: 0; dur: 4000; delay: 3000; easing: easeOutCubic">
+        </a-entity>
+
+
+        <!-- Placeholder Object (Stone Orb) -->
+        <!--
+        <a-sphere position="2 0.5 -5" radius="0.5" color="#888888" shadow>
+        </a-sphere>
+        -->
+
+        <!-- Bear cub (model) -->
+
+        <a-entity gltf-model="assets/models/Black bear.glb" scale="0.1 0.1 0.1" position="-2 0 -6" rotation="0 30 0"
+            shadow
+            animation__bob="property: position; to: -2 0.05 -6; dir: alternate; dur: 2000; loop: true; easing: easeInOutSine"
+            animation__look="property: rotation; to: 0 35 0; dir: alternate; dur: 5000; loop: true; easing: easeInOutSine">
+        </a-entity>
+
+
+        <!-- Camera -->
+
+        <a-entity camera position="0 1.6 0" look-controls wasd-controls="enabled: false">
+        </a-entity>
+
+    </a-scene>
+
+    <script>
+        document.addEventListener('click', function () {
+            if (AFRAME.audioContext && AFRAME.audioContext.state === 'suspended') {
+                AFRAME.audioContext.resume();
+            }
+        });
+        AFRAME.registerComponent('timed-loon', {
+            init: function () {
+                const sound = this.el.components.sound;
+                setInterval(() => {
+                    sound.stopSound();
+                    sound.playSound();
+                }, 60000); // Every 60,000 ms = 1 minute
+            }
+        });
+    </script>
+</body>
+
+</html>
