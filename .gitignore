@@ -1,0 +1,8 @@
+# List of files and folders to ignore in the repository
+
+# System files
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/
